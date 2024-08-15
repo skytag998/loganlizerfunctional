@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Logs por Minutos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .log-container {
+            max-height: 500px; /* Ajusta la altura máxima del contenedor según sea necesario */
+            overflow-y: auto; /* Agrega scroll vertical si el contenido es demasiado largo */
+            padding: 10px; /* Espaciado interno para no tocar los bordes */
+            border: 1px solid #dee2e6; /* Borde para definir claramente el área del log */
+            border-radius: 5px; /* Bordes redondeados para mejorar la apariencia */
+            font-size: 10px; /* Tamaño de letra ajustado a 10 píxeles */
+        }
+        .list-group-item {
+            white-space: pre-wrap; /* Mantiene los saltos de línea y espacios en blanco */
+            word-break: break-word; /* Permite que las palabras largas se rompan en la siguiente línea */
+            overflow-wrap: break-word; /* Rompe palabras largas en la siguiente línea si es necesario */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4">Logs de los últimos minutos</h1>
+    <form action="#" th:action="@{/websphare/live/log/byminutes}" method="post">
+        <div class="form-group">
+            <label for="minutes">Número de minutos:</label>
+            <input type="number" id="minutes" name="minutes" class="form-control" min="1" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    <div class="mt-4">
+        <h3 th:if="${minutes != null}">Mostrando logs de los últimos <span th:text="${minutes}"></span> minutos:</h3>
+        <div class="log-container">
+            <ul class="list-group">
+                <li class="list-group-item" th:each="log : ${logs}">
+                    <span th:text="${log}"></span>
+                </li>
+            </ul>
+        </div>
+        <p th:if="${logs == null || logs.isEmpty()}">No se encontraron logs en el rango especificado.</p>
+    </div>
+    <br>
+    <div class="mt-4">
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='/websphare/live/log'">Volver</button>
+        <button type="button" class="btn btn-info" onclick="printLogs()">Imprimir Logs</button>
+    </div>
+    <br>
+</div>
+
+</body>
+</html>
