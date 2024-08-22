@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:readonlyth="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Log Por Lapso de Tiempo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Log Por Lapso de Tiempo</h1>
+
+    <!-- Formulario para buscar por lapso de tiempo -->
+    <form id="findByMinutes" method="get">
+        <div class="form-group">
+            <label for="minutes">Minutos</label>
+            <input type="number" id="minutes" name="minutes" class="form-control" placeholder="Ingrese cantidad de minutos">
+        </div>
+        <div class="form-group text-center">
+            <button type="button" class="btn btn-primary" onclick="findByMinutesBtn()">Buscar Registro</button>
+            <button type="reset" class="btn btn-secondary">Limpiar formulario</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Función para buscar registro por minutos
+    function findByMinutesBtn() {
+        document.getElementById("findByMinutes").action = "/log/live/lapsetime/last-minutes";
+        document.getElementById("findByMinutes").submit();
+    }
+</script>
+</body>
+</html>

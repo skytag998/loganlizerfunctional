@@ -22,32 +22,12 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-4">Logs de los últimos minutos</h1>
-    <form action="#" th:action="@{/websphare/live/log/byminutes}" method="post">
-        <div class="form-group">
-            <label for="minutes">Número de minutos:</label>
-            <input type="number" id="minutes" name="minutes" class="form-control" min="1" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Buscar</button>
-    </form>
-
-    <div class="mt-4">
-        <h3 th:if="${minutes != null}">Mostrando logs de los últimos <span th:text="${minutes}"></span> minutos:</h3>
-        <div class="log-container">
-            <ul class="list-group">
-                <li class="list-group-item" th:each="log : ${logs}">
-                    <span th:text="${log}"></span>
-                </li>
-            </ul>
-        </div>
-        <p th:if="${logs == null || logs.isEmpty()}">No se encontraron logs en el rango especificado.</p>
-    </div>
     <br>
-    <div class="mt-4">
-        <button type="button" class="btn btn-secondary" onclick="window.location.href='/websphare/live/log'">Volver</button>
-        <button type="button" class="btn btn-info" onclick="printLogs()">Imprimir Logs</button>
-    </div>
+   <h2>Menú</h2>
     <br>
+    <a href="/log/live">Log en vivo</a><br><br>
+    <a href="/log/live/lapsetime">Log en vivo en los ultimos minutos</a><br><br>
+    <a href="/log/files/">Antiguos logs</a>
 </div>
 
 </body>

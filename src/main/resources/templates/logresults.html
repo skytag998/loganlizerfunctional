@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Logs</title>
+    <!-- Incluye Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">Resultados de Logs</h1>
+
+    <!-- Mostrar el contenido de la lista de resultados en el textarea -->
+    <div class="form-group">
+        <textarea id="logOutput" class="form-control" rows="15" readonly th:text="${results}"></textarea>
+    </div>
+
+    <!-- Contenedor para los botones -->
+    <div class="mt-3">
+        <!-- Botón para regresar a la página anterior -->
+        <button class="btn btn-secondary mr-2" onclick="window.history.back();">Regresar</button>
+
+        <!-- Botón para imprimir el contenido del textarea -->
+        <button class="btn btn-primary" onclick="printTextArea()">Imprimir</button>
+    </div>
+</div>
+
+<!-- Incluye jQuery y Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Script JavaScript para imprimir el contenido del textarea -->
+<script>
+    function printTextArea() {
+        var printWindow = window.open('', '', 'height=600,width=800');
+        var content = document.getElementById('logOutput').value;
+        printWindow.document.write('<html><head><title>Print</title>');
+        printWindow.document.write('</head><body >');
+        printWindow.document.write('<pre>' + content + '</pre>');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+    }
+</script>
+</body>
+</html>
