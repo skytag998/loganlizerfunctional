@@ -12,9 +12,7 @@ import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 @Service
@@ -72,25 +70,29 @@ public class LogAnalyzerByFileService {
         return  logReturn;
     }
 
-    public List<String> findByDate (LogSearchRequest logFileSearchRequest) throws IOException {
-        String fileRoute =logFileDirectory+logFileSearchRequest.getFile();
+    public List<String> findByDate(LogSearchRequest logFileSearchRequest) throws IOException {
+        String fileRoute = logFileDirectory + logFileSearchRequest.getFile();
         List<String> lines = readLog(fileRoute);
-        List<String> logReturn = new ArrayList<>();
-        String [] filters = makeFilters(logFileSearchRequest.getDate());
-        for(String filterDate : filters){
-            for (String line :lines){
-                if(line.contains(filterDate)) {
-                    logReturn.add(line);
+        Set<String> logReturnSet = new HashSet<>(); // Usamos un Set para evitar duplicados
+        String[] filters = makeFilters(logFileSearchRequest.getDate());
+
+        for (String filterDate : filters) {
+            for (String line : lines) {
+                if (line.contains(filterDate)) {
+                    logReturnSet.add(line); // Agregamos al Set para evitar duplicados
                 }
             }
         }
-        logReturn.sort(Comparator.comparing(line -> DateLogUtils.extractDateTime((String) line)));
+
+        List<String> logReturn = new ArrayList<>(logReturnSet); // Convertimos el Set a List
+        logReturn.sort(Comparator.comparing(line -> DateLogUtils.extractDateTime(line)));
         return logReturn;
     }
 
     private String [] makeFilters (String date){
-        String dateBefore = DateLogUtils.substractMilliseconds(date,1);
-        String dateAfter = DateLogUtils.addMilliseconds(date,1);
+        String dateBefore = DateLogUtils.subtractMillisecondsFromGivenTime(date,1);
+        System.out.println(dateBefore);
+        String dateAfter = DateLogUtils.addMillisecondsToGivenTime(date,1);
         String [] filters = {dateBefore,date,dateAfter};
         return filters;
     }

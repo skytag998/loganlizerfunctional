@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class LogAnalyzerLogOnLiveService {
@@ -63,19 +61,21 @@ public class LogAnalyzerLogOnLiveService {
         return  logReturn;
     }
 
-    public List<String> filteredByDate (LogRequest logRequest) throws IOException {
+    public List<String> filteredByDate(LogRequest logRequest) throws IOException {
         List<String> logLines = readLog();
-        List<String> logReturn = new ArrayList<>();
+        Set<String> logReturnSet = new HashSet<>(); // Usamos un Set para evitar duplicados
 
-        String [] filers = makeFilters(logRequest.getDate());
+        String[] filters = makeFilters(logRequest.getDate());
 
-        for (String filterDate : filers) {
+        for (String filterDate : filters) {
             for (String line : logLines) {
                 if (line.contains(filterDate)) {
-                    logReturn.add(line);
+                    logReturnSet.add(line); // Agregamos al Set para evitar duplicados
                 }
             }
         }
+
+        List<String> logReturn = new ArrayList<>(logReturnSet); // Convertimos el Set a List
         logReturn.sort(Comparator.comparing(line -> DateLogUtils.extractDateTime(line)));
         return logReturn;
     }

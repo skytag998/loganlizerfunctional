@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Logs por Minutos</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .log-container {
-            max-height: 500px; /* Ajusta la altura máxima del contenedor según sea necesario */
-            overflow-y: auto; /* Agrega scroll vertical si el contenido es demasiado largo */
-            padding: 10px; /* Espaciado interno para no tocar los bordes */
-            border: 1px solid #dee2e6; /* Borde para definir claramente el área del log */
-            border-radius: 5px; /* Bordes redondeados para mejorar la apariencia */
-            font-size: 10px; /* Tamaño de letra ajustado a 10 píxeles */
-        }
-        .list-group-item {
-            white-space: pre-wrap; /* Mantiene los saltos de línea y espacios en blanco */
-            word-break: break-word; /* Permite que las palabras largas se rompan en la siguiente línea */
-            overflow-wrap: break-word; /* Rompe palabras largas en la siguiente línea si es necesario */
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <br>
-   <h2>Menú</h2>
-    <br>
-    <a href="/log/live">Log en vivo</a><br><br>
-    <a href="/log/live/lapsetime">Log en vivo en los ultimos minutos</a><br><br>
-    <a href="/log/files/">Antiguos logs</a>
-</div>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Logs por Minutos</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .log-container {
+                max-height: 500px; /* Ajusta la altura máxima del contenedor según sea necesario */
+                overflow-y: auto; /* Agrega scroll vertical si el contenido es demasiado largo */
+                padding: 10px; /* Espaciado interno para no tocar los bordes */
+                border: 1px solid #dee2e6; /* Borde para definir claramente el área del log */
+                border-radius: 5px; /* Bordes redondeados para mejorar la apariencia */
+                font-size: 10px; /* Tamaño de letra ajustado a 10 píxeles */
+            }
+            .list-group-item {
+                white-space: pre-wrap; /* Mantiene los saltos de línea y espacios en blanco */
+                word-break: break-word; /* Permite que las palabras largas se rompan en la siguiente línea */
+                overflow-wrap: break-word; /* Rompe palabras largas en la siguiente línea si es necesario */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <br>
+            <h2>Menú</h2>
+                <br>
+                <a href="/log/live" class="btn btn-outline-primary">Log en vivo</a><br><br>
+                <a href="/log/live/lapsetime" class="btn btn-outline-primary">Log en vivo en los ultimos minutos</a><br><br>
+                <a href="/log/files" class="btn btn-outline-primary">Antiguos logs</a>
+        </div>
+    </body>
 </html>
