@@ -25,14 +25,11 @@ public class LogAnalyzerLogByLapseTimeService {
         List<String> logReturn = new ArrayList<>();
 
         String now = DateLogUtils.extractDateTime(getLastLine());
-        System.out.println(now);
         String minutesAgo = DateLogUtils.subtractMinutesFromGivenTime(now, minutes);
-        System.out.println(minutesAgo);
         for (String line : lines) {
             String extractedDate = DateLogUtils.extractDateTime(line);
             if (DateLogUtils.isDateWithinRange(extractedDate, minutesAgo, now)) {
                 logReturn.add(line);
-                System.out.println(line);
             }
         }
 

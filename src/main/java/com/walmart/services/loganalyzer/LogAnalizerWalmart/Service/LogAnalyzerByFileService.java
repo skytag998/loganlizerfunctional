@@ -91,7 +91,6 @@ public class LogAnalyzerByFileService {
 
     private String [] makeFilters (String date){
         String dateBefore = DateLogUtils.subtractMillisecondsFromGivenTime(date,1);
-        System.out.println(dateBefore);
         String dateAfter = DateLogUtils.addMillisecondsToGivenTime(date,1);
         String [] filters = {dateBefore,date,dateAfter};
         return filters;

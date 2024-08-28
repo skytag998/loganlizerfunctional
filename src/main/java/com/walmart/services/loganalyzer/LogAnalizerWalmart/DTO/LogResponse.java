@@ -1,3 +1,6 @@
+/*
+    Solo se usa en servicios rest
+ */
 package com.walmart.services.loganalyzer.LogAnalizerWalmart.DTO;
 
 import java.util.List;

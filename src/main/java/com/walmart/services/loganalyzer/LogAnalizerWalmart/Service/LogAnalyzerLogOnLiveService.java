@@ -38,6 +38,7 @@ public class LogAnalyzerLogOnLiveService {
                 }
             }
         }
+        logReturn.sort((Comparator.comparing(line-> DateLogUtils.extractDateTime(line))));
         return logReturn;
     }
 
